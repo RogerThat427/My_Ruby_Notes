@@ -1,0 +1,65 @@
+Classes act as templates for the creation of objects
+Objects created by classes are instances of said classes
+A class is an object, and an instance of the class Class
+
+easy to test:
+  "A String".is_a?(String) -> Returns true
+  1.is_a?(String) -> Returns false
+
+When making a class:
+  class MyArray < Array	#Specifies that Array will be the superclass of MyArray
+  end
+
+Almost every method in Ruby can be redefined, so be careful with classes like: Object, Array, etc.
+#Redefined the + operator to output 42 no matter what
+class Fixnum
+  def +(param)
+    42
+  end
+end
+
+Overiding a method in the subclass doesn't affect the method in the superclass
+
+**
+What is Super?
+Ruby uses the super keywod to allow the overridden method to be called by the overiding method.
+
+class Animal
+  def move
+    "I can move"
+  end
+end
+
+class Bird < Animal
+  def move
+    super + " by flying"
+  end
+end
+
+#Bird.new.move => "I can move by flying"
+
+
+
+class Animal
+  def move
+    "I can move"
+  end
+end
+
+class Bird < Animal
+  def move
+    super + " by flying"
+  end
+end
+
+class Human < Animal
+  def move
+    super + " by walking"
+  end
+end
+
+class Penguin < Bird
+  def move
+    "I can move by swimming"
+  end
+end
