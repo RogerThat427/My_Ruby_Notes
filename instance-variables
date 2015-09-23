@@ -1,0 +1,115 @@
+Getters and Setters:
+
+  class Item
+    def initialize(item_name, quantity)
+      @item_name = item_name
+      @quantity = quantity
+    end
+  
+    def quantity=(new_quantity)
+      @quantity = new_quantity
+    end
+  
+    def quantity
+      @quantity
+    end  
+  end
+
+  item = Item.new("a",1)
+  item.quantity = 3
+  p item.quantity
+
+Getters are simple:
+  def quantity
+    @quantity
+  end
+This just returns the current value of the objects quantity instance
+
+Setters are look a little different that what you're used to from C++ or Java:
+  def quantity=(new_quantity)
+    @quantity
+  end
+It's cool, all setter methods in Ruby end with the = sign...It just makes sense!
+
+attr_reader :description will define def description; @description; end
+attr_writer :description gives you def description=(new_description); @description = new_description; end
+attr_accessor:description is equivalent to attr_reader :description; attr_writer :description
+#attr_accessor does both reader and writer.
+
+Any method definition without the self qualifer is by default and instance method
+
+While instance variables have @ preceeding their name, class variables are prefixed with @@
+
+  class Planet
+    @@planets_count = 0
+    def initialize(name)
+      @name = name
+      @@planets_count += 1
+    end
+    def self.planets_count
+      @@planets_count
+    end  
+  end
+  Planet.new("earth"); Planet.new("uranus"); Planet.new("Pluto");
+  p Planet.planets_count
+
+  =>Outputs '3' because three planets were added and the class variable '@@planets_count' is incremented on each initialization
+
+Class variables store data that belongs to the class, but not the instances
+
+Instance variables are available only for instances of a class. They look like @name. Class variables are available to both class methods and instance methods. They look like @@name
+
+It is almost always a bad idea to use a class variable to store state. There are only a very few valid use cases where class variables are the right choice.
+
+Prefer class instance variables over class variables when you do really need store data at a class level. Class instance variables use the same notation as that of an instance variable. But unlike instance variables, you declare them inside the class definition directly.
+
+In Ruby, all binary operators (Those that have two operands), like ==, are methods that get invoked on the parameter on the left-hand side of the operator. That essentially means that a==b is the same as a.==(b), or like java, a.equals(b).
+
+class Item
+    attr_reader :item_name, :qty
+    
+    def initialize(item_name, qty)
+        @item_name = item_name
+        @qty = qty
+    end
+    def to_s
+        "Item (#{@item_name}, #{@qty})"
+    end
+    
+    def item_name
+      @item_name
+    end
+  
+    def qty
+      @qty
+    end
+  
+    def ==(other_item)
+      if (self.item_name == other_item.item_name) && (self.qty == other_item.qty)
+        return true
+      end
+    end
+end
+
+p Item.new("abcd",1)  == Item.new("abcd",1)
+p Item.new("abcd",2)  == Item.new("abcd",1)
+
+
+What's the difference between puts and p?
+  puts generally prits the result of applying to_s on an object while p prints the result of inspect ing the object
+
+class Item
+  def inspect
+    "Result of inspect"
+  end
+end
+
+puts Item.new
+puts Item.new.to_s
+p Item.new
+
+outputs => #<Item:0x000000034c3a08>
+           #<Item:0x000000034c39b8>
+           Result of inspect
+
+
