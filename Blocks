@@ -1,0 +1,7 @@
+A Block is essentially code that you can store inside of a variable
+
+addition = lambda {|a, b| return a+b }
+puts addition.call(5, 6)
+#lambda is a keyword that creates a Ruby Block
+
+
