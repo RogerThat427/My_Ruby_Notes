@@ -1,0 +1,34 @@
+modules are a superclass of Class
+
+You can hold a class inside a module:
+
+	module Perimeter
+		class Array
+			def initialize
+			end
+		end
+	end
+	
+	our_array = Perimeter::Array.new
+
+Permieter::Array means we're just looking for the class Array inside of Perimeter
+
+This allows you to have classes with the same name used in different ways:
+	module uno
+	  class A
+	    def num
+	      30
+	    end
+	  end
+	end
+
+	module dos
+	  class A
+	    def num
+     	      40
+ 	    end
+	  end
+	end
+
+You can use this method for nesting as well:
+	WhiteFamily::EdWhite::Son::Name => Roger
