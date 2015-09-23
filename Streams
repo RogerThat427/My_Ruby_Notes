@@ -1,0 +1,49 @@
+Creates new I/O stream using the file descriptor for "new-fd"
+  fd = IO.sysopen("new-fd", "w")
+  p IO.new(fd)
+
+puts => sends IO to STDOUT
+gets => captures IO for STDIN
+warn => directs IO to STDERR
+
+Calling puts actually calls Kernel.puts
+	Kernel is accessible everywhere in Ruby
+	Kernel, in turn, calls $stdout.puts
+
+#Captures STDERR so calls to warn are redirected to custom String IO object
+caputre = StringIO.new
+$stderr = capture
+
+
+file = File.open("friend-list.txt", "r+")
+puts file.read
+file.close
+
+file = File.open("master", "r+")
+p file.read
+file.rewind
+buffer = ""
+p file.read(23, bufer)
+p buffer
+file.close
+
+File#rewind is helpful because Ruby keeps track of your position wile reading lines or chunks or whatever at a time. Rewind resets the position.
+
+You can use seek to start at a specific point:
+	p File.read("monk")
+	File.open("monk") do |f|
+	  f.seek(20, IO::SEEK_SET)
+	  p f.read(10)
+	end
+
+Use readlines to get an array of the lines:
+	lines = File.readlines("monk")
+	p lines		#Outputs array
+	p lines[0]	#Outputs first element
+
+Writing to a file:
+	File.open("disguise", "w") do |f|
+	  f.write "Bar"
+	end
+
+
