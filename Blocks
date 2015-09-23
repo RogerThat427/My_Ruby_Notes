@@ -4,4 +4,73 @@ addition = lambda {|a, b| return a+b }
 puts addition.call(5, 6)
 #lambda is a keyword that creates a Ruby Block
 
+A block is like a method, but isn't associated with an object
 
+Addition = lambda {|a, b| return a + b } # use this as your example!
+Subtraction = lambda {|a, b| return a-b } # your code between the braces
+Multiplication = lambda {|a, b| return a*b } # your code between the braces
+Division = lambda {|a,b| return a./b } # your code between the braces
+
+*****
+Yield
+-----
+
+Before Yield:
+  def calculation(a, b, operation)
+    operation.call(a, b)
+  end
+
+  puts calculation(5, 6, lambda { |a, b| a + b })
+  puts calculation(5, 6, lambda { |a, b| a - b })
+
+--
+
+After Yield:
+  def calculation(a, b)
+    yield(a, b)
+  end
+
+  puts calculation(5, 6) { |a, b| a + b }
+  puts calculation(5, 6) { |a, b| a - b }
+
+
+
+do
+  **code**
+end
+
+is the same as
+
+{
+  **code**
+}
+
+Typically use {} for one line of code, and do-end for multiple
+
+
+Difference Between Lambda and Proc:
+	 a return in Lambda returns all the way to the calling method, while the Proc returns just from the block.
+
+  #Outputs "we just returned from the calling method
+  def a_method
+    lambda { return "we just returned from the block" }.call
+    return "we just returned from the calling method"
+  end
+  puts a_method
+
+  #Outputs we just returned from the block
+  def a_method
+    Proc.new { return "we just returned from the block"}.call
+    return "we just returned from the calling method"
+  end
+  puts a_method
+
+
+You can use -> as a alternative to Kernel#lambda:
+  short = -> (a, b) { a + b}
+  puts short.call(2, 3)
+
+  long = lambda { |a, b| a + b }
+  puts long.call(2,3)
+
+In the same way, you can also use proc and Proc.new interchangably
