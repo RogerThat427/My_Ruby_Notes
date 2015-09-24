@@ -1,0 +1,57 @@
+zen, life = [42, 43]
+  This actually breaks down the array and places the info into the variables
+  zen = 42
+  life = 43
+
+You can also do this with multidimentional arrays:
+  zen, john = [[4,8], [3, 16], [23, 42, 15]]
+  zen = [4, 8]
+  john = [3, 16]
+
+def zen
+  [42, true]
+end
+x, y = zen
+#x = 42
+#y = true
+
+[[1, 2, 3, 4], [42, 43]].each{|a, b| puts "#{a} #{b}"}
+   stl:
+     1 2
+     42 43
+
+zen, life, more = [42, 43]
+
+puts zen   =>  42
+puts life  =>  43
+p more     =>  nil
+
+
+**
+The Splat
+--
+Ruby can use destruction by using the splat(*) operator
+
+car, *cdr = [42, 43, 44]
+car: 42
+cdr: [43, 44]
+
+*initial, last = [42, 43, 44]
+initial: [42, 43]
+last: 44
+
+*initial, second_last, last = [42, 43, 44]
+initial: [42]
+second_last: 43
+last: 44
+
+The splat allows us to split the array up by the number of variables and slurp the rest of the arrayinto the second variable.
+
+You can also use splat to slurp arguments passed into an array:
+def zen(*args)
+  [args.first, args.last]
+end
+p zen(42, 43, 44, 45, 46)
+
+->outputs:
+    [42, 46]
