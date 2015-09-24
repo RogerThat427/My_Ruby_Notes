@@ -55,3 +55,48 @@ p zen(42, 43, 44, 45, 46)
 
 ->outputs:
     [42, 46]
+
+
+ary = [[4, 8], [15, 16], [23, 42]]
+puts Hash[*ary.flatten]
+outputs:
+  {4=>8, 15=>16, 23=>42}
+
+
+Arrays:
+  array.count
+  array.size
+  array.length
+  -> all return number of elements
+
+You can also use count to find number of instances of a given element
+puts [42, 8, 15, 16, 23, 42].count(42)
+  -> returns 2 because there are two instances of the number 42
+
+[4, 8, 15, 16, 23, 42].count { |e| e % 2 == 0 }
+  -> prints the number of even elements in the array.
+
+flatten returns a one-dimentional array:
+  p [4, [8], [15], [16, [23, 42]]].flatten -->  [4, 8, 15, 16, 23, 42]
+
+using flatten(1) will tell the function to only flatten one set of arrays.
+
+compact method returns a new array with all the nil elements removed
+
+.zip works like cross product:
+  p [4, 8, 15, 16, 23, 42].zip([42, 23, 16, 15, 8])
+  --> returns:
+        [[4, 42], [8, 23], [15, 16], [16, 15], [23, 8], [42, nil]]
+
+
+array.join(", ") -->  Converts the elements in an array to a comma delimited string
+
+array.shift gets rid of the first element of an array and returns it:
+  -> [4, 8, 15, 16, 23, 42].shift --> 4
+                           .shift(2)-->[4, 8]
+
+array.unshift adds element to the front:
+  ->[8, 15, 16, 23, 42].unshift(4) --> [4, 8, 15, 16, 23, 42]
+		       .unshift(4, 8, 15) ...
+
+
